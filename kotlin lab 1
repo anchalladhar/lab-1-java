@@ -2,34 +2,104 @@ import java.util.Scanner
 
 fun main() {
     val scanner = Scanner(System.`in`)
-    
+
     // Collect numeric value from the user
     print("Enter the numeric value: ")
     val value = scanner.nextDouble()
-    
+
     // Collect current unit of measurement
     print("Enter the current unit of measurement: ")
     val currentUnit = scanner.next()
-    
+
+    // Collect target unit of measurement
+    print("Enter the target unit of measurement: ")
+    val targetUnit = scanner.next()
+
     // Determine the appropriate conversion and display the result
-    val result = when (currentUnit) {
-        "km" -> value * 0.62 // km to mi
-        "mi" -> value * 1.61 // mi to km
-        "cm" -> value * 0.39 // cm to in
-        "in" -> value * 2.54 // in to cm
-        "kg" -> value * 2.2  // kg to lb
-        "lb" -> value * 0.45 // lb to kg
-        "g" -> value * 0.04  // g to oz
-        "oz" -> value * 28.35 // oz to g
-        "C" -> (value * (9/5)) + 32 // Celsius to Fahrenheit
-        "F" -> ((value - 32) * (5/9)) // Fahrenheit to Celsius
-        "L" -> value * 4.17 // L to cups
-        "cup" -> value * 0.24 // cups to L
-        else -> {
-            println("Invalid unit of measurement.")
-            return
-        }
-    }
-    
+    val result = convertUnit(value, currentUnit, targetUnit)
     println("Result: $result")
 }
+
+fun convertUnit(value: Double, currentUnit: String, targetUnit: String): Double {
+    return when (currentUnit) {
+        "km" -> when (targetUnit) {
+            "mi" -> value * 0.62 // km to mi
+            else -> {
+                println("Invalid target unit of measurement.")
+                return Double.NaN
+            }
+        }
+        "mi" -> when (targetUnit) {
+            "km" -> value * 1.61 // mi to km
+            else -> {
+                println("Invalid target unit of measurement.")
+                return Double.NaN
+            }
+        }
+        "cm" -> when (targetUnit) {
+            "in" -> value * 0.39 // cm to in
+            else -> {
+                println("Invalid target unit of measurement.")
+                return Double.NaN
+            }
+        }
+        "in" -> when (targetUnit) {
+            "cm" -> value * 2.54 // in to cm
+            else -> {
+                println("Invalid target unit of measurement.")
+                return Double.NaN
+            }
+        }
+        "kg" -> when (targetUnit) {
+            "lb" -> value * 2.2 // kg to lb
+            else -> {
+                println("Invalid target unit of measurement.")
+                return Double.NaN
+            }
+        }
+        "lb" -> when (targetUnit) {
+            "kg" -> value * 0.45 // lb to kg
+            else -> {
+                println("Invalid target unit of measurement.")
+                return Double.NaN
+            }
+        }
+        "g" -> when (targetUnit) {
+            "oz" -> value * 0.04 // g to oz
+            else -> {
+                println("Invalid target unit of measurement.")
+                return Double.NaN
+            }
+        }
+        "oz" -> when (targetUnit) {
+            "g" -> value * 28.35 // oz to g
+            else -> {
+                println("Invalid target unit of measurement.")
+                return Double.NaN
+            }
+        }
+        "C" -> when (targetUnit) {
+            "F" -> (value * 9 / 5) + 32 // Celsius to Fahrenheit
+            else -> {
+                println("Invalid target unit of measurement.")
+                return Double.NaN
+            }
+        }
+        "F" -> when (targetUnit) {
+            "C" -> (value - 32) * 5 / 9 // Fahrenheit to Celsius
+            else -> {
+                println("Invalid target unit of measurement.")
+                return Double.NaN
+            }
+        }
+        "L" -> when (targetUnit) {
+            "cup" -> value * 4.17 // L to cups
+            else -> {
+                println("Invalid target unit of measurement.")
+                return Double.NaN
+            }
+        }
+        "cup" -> when (targetUnit) {
+            "L" -> value * 0.24 // cups to L
+            else -> {
+                println("Invalid target unit of
