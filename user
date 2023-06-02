@@ -1,0 +1,3 @@
+// Collect target unit of measurement
+print("Enter the target unit of measurement: ")
+val targetUnit = scanner.next()
